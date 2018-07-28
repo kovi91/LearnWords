@@ -27,9 +27,17 @@ namespace LearnWords
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseMySql(Configuration.GetConnectionString("MySQLConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 4;
+                options.Password.RequireDigit = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+            })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
