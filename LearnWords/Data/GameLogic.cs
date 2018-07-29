@@ -10,9 +10,12 @@ namespace LearnWords.Data
     {
         List<WordModel> gamewords;
         Random r;
+        MongoRepository _repo;
+
         public void Init(string categoryhash, MongoRepository repo, int count = 0)
         {
             r = new Random();
+            _repo = repo;
             gamewords = new List<WordModel>();
             var coll = repo.GetCollection(categoryhash);
             WordModel[] tmparray = coll.ToArray();
@@ -57,6 +60,22 @@ namespace LearnWords.Data
                 arraytomix[a] = arraytomix[b];
                 arraytomix[b] = tmp;
             }
+        }
+
+        public void AddResult(string wordhash, int result, int note)
+        {
+            WordModel actual = _repo.GetWord(wordhash);
+            actual.LastAccess = DateTime.Now;
+            if (result == 1)
+            {
+                actual.Goods++;
+            }
+            else
+            {
+                actual.Bads++;
+            }
+            actual.Note = note;
+            _repo.EditWord(actual);
         }
     }
 }

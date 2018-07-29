@@ -15,5 +15,13 @@ namespace LearnWords.Models
 
         public string Category { get; set;}
 
+        public DateTime LastAccess { get; set; }
+
+        public int Goods { get; set; }
+
+        public int Bads { get; set; }
+
+        public int Note { get; set; }
+
     }
 }

@@ -83,8 +83,9 @@ namespace LearnWords.Controllers
 
         [Authorize]
         [HttpGet]
-        public IActionResult PlayNext(string wordhash, string categoryhash, bool result, int note)
+        public IActionResult PlayNext(string wordhash, string categoryhash, int result, int note)
         {
+            _gl.AddResult(wordhash, result, note);
             WordModel next = _gl.GetNextWord();
             if (next == null)
             {

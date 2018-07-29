@@ -13,27 +13,32 @@
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.WordHash)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HomeLang)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ForeLang)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Category)
-                </th>
-            <th></th>
+            <th>
+                Home language
+            </th>
+            <th>
+                Foreign language
+            </th>
+            <th>
+                Good try
+            </th>
+            <th>
+                Bad try
+            </th>
+            <th>
+                Relevant
+            </th>
+            <th>
+                Last access
+            </th>
+            <th>
+                Actions
+            </th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.WordHash)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.HomeLang)
             </td>
@@ -41,10 +46,26 @@
                 @Html.DisplayFor(modelItem => item.ForeLang)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Category)
+                <span class="label label-success"> @item.Goods</span>
+                @*@Html.DisplayFor(modelItem => item.Goods)*@
             </td>
             <td>
-                @Html.ActionLink("Edit", "EditWord", new {  wordhash=item.WordHash, cathash = item.Category }) |
+                <span class="label label-danger"> @item.Bads</span>
+                @*@Html.DisplayFor(modelItem => item.Bads)*@
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.Note)*@
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: @(item.Note*20)%;">
+                        <span class="sr-only">@(item.Note*20)% Complete</span>
+                    </div>
+                </div>
+            </td>
+            <td>
+                @item.LastAccess.ToString()
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditWord", new { wordhash = item.WordHash, cathash = item.Category }) |
                 @Html.ActionLink("Delete", "DeleteWord", new { wordhash = item.WordHash, cathash = item.Category })
             </td>
         </tr>

@@ -13,11 +13,6 @@
         <form asp-action="EditWord">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="WordHash" class="control-label"></label>
-                <input asp-for="WordHash" class="form-control" />
-                <span asp-validation-for="WordHash" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="HomeLang" class="control-label"></label>
                 <input asp-for="HomeLang" class="form-control" />
                 <span asp-validation-for="HomeLang" class="text-danger"></span>
@@ -27,11 +22,12 @@
                 <input asp-for="ForeLang" class="form-control" />
                 <span asp-validation-for="ForeLang" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Category" class="control-label"></label>
-                <input asp-for="Category" class="form-control" />
-                <span asp-validation-for="Category" class="text-danger"></span>
-            </div>
+            @Html.HiddenFor(m => m.Bads)
+            @Html.HiddenFor(m => m.Goods)
+            @Html.HiddenFor(m => m.LastAccess)
+            @Html.HiddenFor(m => m.Note)
+            @Html.HiddenFor(m => m.WordHash)
+            @Html.HiddenFor(m => m.Category)
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
