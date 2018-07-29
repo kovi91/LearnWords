@@ -43,6 +43,7 @@ namespace LearnWords
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddSingleton<MongoRepository, MongoRepository>();
 
             services.AddMvc();
         }
