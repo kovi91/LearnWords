@@ -3,39 +3,74 @@
 @{
     ViewData["Title"] = "Play";
 }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#btn_reveal").click(function () {
+            $("#foreign").show();
+        });
+    });
+</script>
 
 <h2>Play</h2>
 
 <div>
     <h4>WordModel</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.WordHash)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.WordHash)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.HomeLang)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.HomeLang)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ForeLang)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ForeLang)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Category)
-        </dd>
-    </dl>
+    <table style="padding:15px">
+
+        <tr>
+            <td>
+                <img src="~/images/hun.png" width="64" height="64" alt="hungarian flag" />
+            </td>
+            <td style="padding:10px">
+                <b>
+                    @Html.DisplayFor(model => model.HomeLang)
+                </b>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <button id="btn_reveal" class="btn btn-success">Reveal</button>
+            </td>
+        </tr>
+    </table>
+
+    <div id="foreign" style="display:none">
+        <table style="padding:15px">
+            <tr>
+                <td>
+                    <img src="~/images/eng.png" width="64" height="64" alt="english flag" />
+                </td>
+                <td style="padding:10px">
+                    <b>
+                        @Html.DisplayFor(model => model.ForeLang)
+                    </b>
+                </td>
+            </tr>
+        </table>
+        <div class="btn-group" role="group" aria-label="...">
+            @Html.ActionLink("5", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 0, note = 5 }, htmlAttributes: new { @class = "btn btn-danger" })
+            @Html.ActionLink("4", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 0, note = 4 }, htmlAttributes: new { @class = "btn btn-danger" })
+            @Html.ActionLink("3", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 0, note = 3 }, htmlAttributes: new { @class = "btn btn-danger" })
+            @Html.ActionLink("2", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 0, note = 2 }, htmlAttributes: new { @class = "btn btn-danger" })
+            @Html.ActionLink("1", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 0, note = 1 }, htmlAttributes: new { @class = "btn btn-danger" })
+
+        </div>
+        <div class="btn-group" role="group" aria-label="...">
+            @Html.ActionLink("1", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 1, note = 1 }, htmlAttributes: new { @class = "btn btn-success" })
+            @Html.ActionLink("2", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 1, note = 2 }, htmlAttributes: new { @class = "btn btn-success" })
+            @Html.ActionLink("3", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 1, note = 3 }, htmlAttributes: new { @class = "btn btn-success" })
+            @Html.ActionLink("4", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 1, note = 4 }, htmlAttributes: new { @class = "btn btn-success" })
+            @Html.ActionLink("5", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 1, note = 5 }, htmlAttributes: new { @class = "btn btn-success" })
+
+        </div>
+
+    </div>
 </div>
 <div>
-    @Html.ActionLink("Next", "PlayNext", new {  wordhash = Model.WordHash, categoryhash = Model.Category,  result = 3, note = 3  }) |
+    @*@Html.ActionLink("Next", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 3, note = 3 }) |*@
 </div>
+
+
