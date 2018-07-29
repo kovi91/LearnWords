@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <Reference Include="MongoDB">
-      <HintPath>..\..\..\..\Documents\msc\adatbázisok\MongoDB.dll</HintPath>
+      <HintPath>bin\MongoDB.dll</HintPath>
     </Reference>
   </ItemGroup>
 
