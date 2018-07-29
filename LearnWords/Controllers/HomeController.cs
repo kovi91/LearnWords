@@ -37,7 +37,6 @@ namespace LearnWords.Controllers
 
         public IActionResult Index()
         {
-            _repo.Change(_current_user, "categories");
             return View();
         }
 
@@ -52,6 +51,7 @@ namespace LearnWords.Controllers
         [HttpGet]
         public IActionResult Browse()
         {
+            _repo.Change(_current_user, "categories");
             ViewData["Message"] = "Your contact page.";
             return View(_repo.GetCategories());
         }
@@ -69,6 +69,22 @@ namespace LearnWords.Controllers
         {
             _repo.AddCategory(cm);
             return RedirectToAction("Browse");
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult Play(string hash)
+        {
+            _repo.Change(_current_user, hash);
+            return View(_repo.GetCollection());
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult Explore(string hash)
+        {
+            _repo.Change(_current_user, hash);
+            return View(_repo.GetCollection());
         }
 
         public IActionResult Error()

@@ -12,7 +12,7 @@ namespace LearnWords.Data
     public class MongoRepository
     {
         IMongoDatabase _db;
-        IMongoCollection _collection;
+        IMongoCollection<WordModel> _collection;
         Mongo _mongo;
         public MongoRepository(IConfiguration Configuration)
         {
@@ -23,16 +23,23 @@ namespace LearnWords.Data
         public void Change(string db, string collection)
         {
             _db = _mongo.GetDatabase(db);
-            var _collection = _db.GetCollection<WordModel>(collection);
+            _collection = _db.GetCollection<WordModel>(collection);
         }
 
         public IEnumerable<CategoryModel> GetCategories()
         {
-            var _collection = _db.GetCollection<CategoryModel>("categories");
-            var q = from x in _collection.Linq()
+            var cat  = _db.GetCollection<CategoryModel>("categories");
+            var q = from x in cat.Linq()
                     select x;
             return q;
             
+        }
+
+        public IEnumerable<WordModel> GetCollection()
+        {
+            var coll = from x in _collection.Linq()
+                       select x;
+            return coll;
         }
 
         public void AddCategory(CategoryModel category)
