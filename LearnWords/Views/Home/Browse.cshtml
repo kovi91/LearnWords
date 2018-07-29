@@ -22,8 +22,8 @@
         </div>
         <div class="panel-body">
             <p>@item.Description</p>
-            @Html.ActionLink("Play", "Play", new { hash = item.Hash }, htmlAttributes: new { @class = "btn btn-success" })
-            @Html.ActionLink("Explore", "Explore", new { hash = item.Hash }, htmlAttributes: new { @class = "btn btn-warning" })
+            @Html.ActionLink("Play", "Play", new { categoryhash = item.Hash }, htmlAttributes: new { @class = "btn btn-success" })
+            @Html.ActionLink("Explore", "Explore", new { categoryhash = item.Hash }, htmlAttributes: new { @class = "btn btn-warning" })
         </div>
     </div>
 

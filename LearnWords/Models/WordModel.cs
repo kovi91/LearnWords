@@ -7,7 +7,7 @@ namespace LearnWords.Models
 {
     public class WordModel
     {
-        public string Hash { get; set; }
+        public string WordHash { get; set; }
 
         public string HomeLang { get; set;}
 

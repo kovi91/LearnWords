@@ -1,0 +1,53 @@
+﻿@model IEnumerable<LearnWords.Models.WordModel>
+
+@{
+    ViewData["Title"] = "Explore";
+}
+
+<h2>Explore</h2>
+
+<p>
+    @Html.ActionLink("Create new word", "CreateWord", new { categoryhash = ViewData["categoryhash"] }, htmlAttributes: new { @class = "btn btn-primary" })
+    @Html.ActionLink("Back to categories", "Browse", null, htmlAttributes: new { @class = "btn btn-success" })
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.WordHash)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HomeLang)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ForeLang)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Category)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.WordHash)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HomeLang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ForeLang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditWord", new {  wordhash=item.WordHash, cathash = item.Category }) |
+                @Html.ActionLink("Delete", "DeleteWord", new { wordhash = item.WordHash, cathash = item.Category })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,41 @@
+﻿@model LearnWords.Models.WordModel
+
+@{
+    ViewData["Title"] = "Play";
+}
+
+<h2>Play</h2>
+
+<div>
+    <h4>WordModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.WordHash)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.WordHash)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HomeLang)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HomeLang)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ForeLang)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ForeLang)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Category)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Next", "PlayNext", new {  wordhash = Model.WordHash, categoryhash = Model.Category,  result = 3, note = 3  }) |
+</div>
