@@ -12,6 +12,8 @@ namespace LearnWords.Data
         Random r;
         MongoRepository _repo;
 
+
+
         public void Init(string categoryhash, MongoRepository repo, int count = 0)
         {
             r = new Random();
@@ -19,22 +21,38 @@ namespace LearnWords.Data
             gamewords = new List<WordModel>();
             var coll = repo.GetCollection(categoryhash);
             WordModel[] tmparray = coll.ToArray();
-            RandomSort(tmparray);
-            if (count > tmparray.Length || count == 0)
-            {
-                count = tmparray.Length;
-            }
 
-            for (int i = 0; i < count; i++)
-            {
-                gamewords.Add(tmparray[i]);
-            }
+            MixandPrepare(tmparray, gamewords, count);
+            
         }
+
+       
 
         public void Init(List<string> categoryhashes, MongoRepository repo, int count = 0)
         {
             r = new Random();
+            _repo = repo;
             gamewords = new List<WordModel>();
+
+            IEnumerable<WordModel> tmparray = new WordModel[0];
+
+            foreach (string item in categoryhashes)
+            {
+                var coll = repo.GetCollection(item);
+                tmparray = tmparray.Concat(coll.ToArray());
+            }
+            MixandPrepare(tmparray.ToArray(), gamewords, count);
+        }
+
+        public void Init(MongoRepository repo, bool weak, int count = 0)
+        {
+            r = new Random();
+            _repo = repo;
+            gamewords = new List<WordModel>();
+            var coll = repo.GetAllCollection();
+            WordModel[] tmparray = coll.ToArray();
+
+            MixandPrepare(tmparray, gamewords, count);
         }
 
         public WordModel GetNextWord()
@@ -59,6 +77,20 @@ namespace LearnWords.Data
                 WordModel tmp = arraytomix[a];
                 arraytomix[a] = arraytomix[b];
                 arraytomix[b] = tmp;
+            }
+        }
+
+        private void MixandPrepare(WordModel[] tmparray, List<WordModel> gamewords, int count)
+        {
+            RandomSort(tmparray);
+            if (count > tmparray.Length || count == 0)
+            {
+                count = tmparray.Length;
+            }
+
+            for (int i = 0; i < count; i++)
+            {
+                gamewords.Add(tmparray[i]);
             }
         }
 

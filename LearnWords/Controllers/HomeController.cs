@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
+using System.IO;
 
 namespace LearnWords.Controllers
 {
@@ -74,6 +75,30 @@ namespace LearnWords.Controllers
         }
 
         [Authorize]
+        [HttpPost]
+        public IActionResult MultiPlayCustom(string [] values)
+        {
+            _gl.Init(values.ToList(), _repo, 25);
+            return View("Play", _gl.GetNextWord());
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult MultiPlayRandom()
+        {
+            _gl.Init(_repo, false,  25);
+            return View("Play", _gl.GetNextWord());
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult MultiPlayWeak()
+        {
+            _gl.Init(_repo, true,  25);
+            return View("Play", _gl.GetNextWord());
+        }
+
+        [Authorize]
         [HttpGet]
         public IActionResult Play(string categoryhash)
         {
@@ -128,7 +153,7 @@ namespace LearnWords.Controllers
 
         [Authorize]
         [HttpGet]
-        public IActionResult CreateWord(string categoryhash)
+        public  IActionResult CreateWord(string categoryhash)
         {
             var word = new WordModel();
             word.Category = categoryhash;
@@ -137,9 +162,9 @@ namespace LearnWords.Controllers
 
         [Authorize]
         [HttpPost]
-        public IActionResult CreateWord(WordModel word)
+        public async Task<IActionResult> CreateWord(WordModel word)
         {
-            _repo.AddWord(word);
+            await _repo.AddWord(word);
             return RedirectToAction("Explore", new { categoryhash = word.Category });
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -46,19 +47,62 @@ namespace LearnWords.Data
             return coll;
         }
 
+        public IEnumerable<WordModel> GetAllCollection()
+        {
+            var coll = from x in _collection.Linq()
+                       select x;
+            return coll;
+        }
+
         public void AddCategory(CategoryModel category)
         {
+            using (MD5 md5Hash = MD5.Create())
+            {
+                string hash = GetMd5Hash(md5Hash, category.Name + category.Description);
+                category.Hash = hash;
+            }
+
+            var q = from x in _categories.Linq()
+                    select x;
+
+            int count = q.ToArray().Count();
+            category.Id = count;
+
             _categories.Save(category);
         }
 
-        public void AddWord(WordModel word)
+        public async Task<string> AddWord(WordModel word)
         {
             using (MD5 md5Hash = MD5.Create())
             {
                 string hash = GetMd5Hash(md5Hash, word.HomeLang+word.ForeLang);
                 word.WordHash = hash;
             }
+
+            if (word.Picture == null || word.Picture.Length == 0)
+            {
+                word.ImageUrl = "none.JPG";
+            }
+            else
+            {
+                var ff = word.Picture;
+
+                var filePath = Path.GetTempFileName();
+
+                var path = Path.Combine(
+                            Directory.GetCurrentDirectory(), "wwwroot/images/wordpictures",
+                            word.WordHash + "." + ff.FileName.Split('.')[1]);
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await ff.CopyToAsync(stream);
+                }
+
+                word.ImageUrl = word.WordHash + "." + ff.FileName.Split('.')[1];
+            }
+            word.Picture = null;
             _collection.Save(word);
+            return "alma";
         }
 
         static string GetMd5Hash(MD5 md5Hash, string input)

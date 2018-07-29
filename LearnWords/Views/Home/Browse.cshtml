@@ -4,12 +4,45 @@
     ViewData["Title"] = "Browse collection";
 }
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#customplaybutton").click(function () {
+            $("#hiddenselector").show();
+        });
+    });
+</script>
+
 <h3>
     Manage your collections
 </h3>
 <div>
     <a class="btn btn-primary" href="AddCategory">Add category</a>
+    <a class="btn btn-success" href="MultiPlayRandom">Random 25 game</a>
+    <button id="customplaybutton" class="btn btn-warning">Custom 25 game</button>
+    <a class="btn btn-danger" href="MultiPlayWeak">Weak 25 game</a>
 </div>
+<div id="hiddenselector" style="display:none">
+    <div class="row">
+        <div class="col-md-4">
+            @using (Html.BeginForm("MultiPlayCustom", "Home", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <select name="values" size="10" multiple>
+                        @foreach (var item in Model)
+                        {
+                            <option value="@item.Hash">@item.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Play</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
 <br />
 <br />
 

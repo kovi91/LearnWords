@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,6 +23,10 @@ namespace LearnWords.Models
         public int Bads { get; set; }
 
         public int Note { get; set; }
+
+        public IFormFile Picture { get; set; }
+
+        public string ImageUrl { get; set; }
 
     }
 }
