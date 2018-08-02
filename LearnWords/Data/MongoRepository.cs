@@ -257,7 +257,7 @@ namespace LearnWords.Data
                 string fw = splitter[1];
 
                 var q = from x in picturefiles
-                        where x.Name.Split('.')[0] == fw.ToUpper()
+                        where x.Name.Split('.')[0].ToUpper() == fw.ToUpper()
                         select x;
                 AddMultipleWords(hw, fw, categoryhash, q.FirstOrDefault());
 
