@@ -10,6 +10,7 @@
     @Html.ActionLink("Create new word", "CreateWord", new { categoryhash = ViewData["categoryhash"] }, htmlAttributes: new { @class = "btn btn-primary" })
     @Html.ActionLink("Import words", "ImportWords", new { categoryhash = ViewData["categoryhash"] }, htmlAttributes: new { @class = "btn btn-warning" })
     @Html.ActionLink("Back to categories", "Browse", null, htmlAttributes: new { @class = "btn btn-success" })
+    @Html.ActionLink("Delete all", "DeleteWords", new { categoryhash = ViewData["categoryhash"] }, htmlAttributes: new { @class = "btn btn-danger" })
 </p>
 <table class="table">
     <thead>

@@ -135,6 +135,15 @@ namespace LearnWords.Data
             return "alma";
         }
 
+        internal void DeleteAll(string categoryhash)
+        {
+            var collection = this.GetCollection(categoryhash);
+            foreach (var item in collection)
+            {
+                this.DeleteWord(item.WordHash);
+            }
+        }
+
         static string GetMd5Hash(MD5 md5Hash, string input)
         {
             byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
