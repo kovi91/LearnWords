@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using MongoDB;
 using MongoDB.Linq;
-using Microsoft.Office.Interop.Excel;
 
 namespace LearnWords.Data
 {

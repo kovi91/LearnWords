@@ -129,6 +129,14 @@ namespace LearnWords.Controllers
 
         [Authorize]
         [HttpGet]
+        public IActionResult Learn(string categoryhash)
+        {
+            ViewData["categoryhash"] = categoryhash;
+            return View(_repo.GetCollection(categoryhash));
+        }
+
+        [Authorize]
+        [HttpGet]
         public IActionResult DeleteWord(string wordhash, string cathash)
         {
             _repo.DeleteWord(wordhash);

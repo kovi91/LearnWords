@@ -1,0 +1,28 @@
+﻿@model IEnumerable<LearnWords.Models.WordModel>
+
+@{
+    ViewData["Title"] = "Explore";
+}
+
+<h2>Learn</h2>
+
+
+<p>
+    @Html.ActionLink("Back to categories", "Browse", null, htmlAttributes: new { @class = "btn btn-success" })
+</p>
+
+@foreach (var item in @Model)
+{
+    <div style="display: block">
+        <div class="col-xs-6 col-md-3">
+            <div class="thumbnail">
+                <img src="~/images/wordpictures/@item.ImageUrl" alt="picture" height="171">
+                <div class="caption">
+                    <h3>@item.ForeLang</h3>
+                    <p>@item.HomeLang</p>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

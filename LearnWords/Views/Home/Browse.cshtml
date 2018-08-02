@@ -58,6 +58,7 @@
             <p>@item.Description</p>
             @Html.ActionLink("Play", "Play", new { categoryhash = item.Hash }, htmlAttributes: new { @class = "btn btn-success" })
             @Html.ActionLink("Explore", "Explore", new { categoryhash = item.Hash }, htmlAttributes: new { @class = "btn btn-warning" })
+            @Html.ActionLink("Learn", "Learn", new { categoryhash = item.Hash }, htmlAttributes: new { @class = "btn btn-danger" })
         </div>
     </div>
 
