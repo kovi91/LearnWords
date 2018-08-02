@@ -168,6 +168,21 @@ namespace LearnWords.Controllers
             return RedirectToAction("Explore", new { categoryhash = word.Category });
         }
 
+        [Authorize]
+        [HttpGet]
+        public IActionResult ImportWords(string categoryhash)
+        {
+            return View("ImportWords", categoryhash);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> ImportWords(string categoryhash, IFormFile Zip)
+        {
+            await _repo.ImportWords(categoryhash, Zip);
+            return RedirectToAction("Explore", "Home", categoryhash);
+        }
+
 
         public IActionResult Error()
         {

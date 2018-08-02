@@ -8,6 +8,7 @@
 
 <p>
     @Html.ActionLink("Create new word", "CreateWord", new { categoryhash = ViewData["categoryhash"] }, htmlAttributes: new { @class = "btn btn-primary" })
+    @Html.ActionLink("Import words", "ImportWords", new { categoryhash = ViewData["categoryhash"] }, htmlAttributes: new { @class = "btn btn-warning" })
     @Html.ActionLink("Back to categories", "Browse", null, htmlAttributes: new { @class = "btn btn-success" })
 </p>
 <table class="table">
