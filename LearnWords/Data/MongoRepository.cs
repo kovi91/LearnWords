@@ -290,7 +290,7 @@ namespace LearnWords.Data
                 string fw = splitter[1];
                 string desc = splitter[2];
 
-                if (splitter.Length == 4)
+                if (splitter[3].Length > 0)
                 {
                     var q = from x in picturefiles
                             where x.Name.Split('.')[0].ToUpper() == splitter[3].ToUpper()
