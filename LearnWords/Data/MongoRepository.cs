@@ -95,12 +95,13 @@ namespace LearnWords.Data
             _categories.Save(category);
         }
 
-        private void AddMultipleWords(string home, string fore, string categoryhash, FileInfo image)
+        private void AddMultipleWords(string home, string fore, string desc, string categoryhash, FileInfo image)
         {
             WordModel newmodel = new WordModel();
             newmodel.HomeLang = home;
             newmodel.ForeLang = fore;
             newmodel.Category = categoryhash;
+            newmodel.Description = desc;
 
             using (MD5 md5Hash = MD5.Create())
             {
@@ -287,11 +288,24 @@ namespace LearnWords.Data
 
                 string hw = splitter[0];
                 string fw = splitter[1];
+                string desc = splitter[2];
 
-                var q = from x in picturefiles
-                        where x.Name.Split('.')[0].ToUpper() == fw.ToUpper()
-                        select x;
-                AddMultipleWords(hw, fw, categoryhash, q.FirstOrDefault());
+                if (splitter.Length == 4)
+                {
+                    var q = from x in picturefiles
+                            where x.Name.Split('.')[0].ToUpper() == splitter[3].ToUpper()
+                            select x;
+                    AddMultipleWords(hw, fw, desc, categoryhash, q.FirstOrDefault());
+                }
+                else
+                {
+                    var q = from x in picturefiles
+                            where x.Name.Split('.')[0].ToUpper() == fw.ToUpper()
+                            select x;
+                    AddMultipleWords(hw, fw, desc, categoryhash, q.FirstOrDefault());
+                }
+
+                
 
             }
 
