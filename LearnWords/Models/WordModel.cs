@@ -28,5 +28,7 @@ namespace LearnWords.Models
 
         public string ImageUrl { get; set; }
 
+        public double ReactionTime { get; set; }
+
     }
 }

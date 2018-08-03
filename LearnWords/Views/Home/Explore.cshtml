@@ -34,6 +34,9 @@
                 Last access
             </th>
             <th>
+                Average reaction
+            </th>
+            <th>
                 Actions
             </th>
         </tr>
@@ -59,12 +62,15 @@
                 @*@Html.DisplayFor(modelItem => item.Note)*@
                 <div class="progress">
                     <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: @(item.Note*20)%;">
-                        <span class="sr-only">@(item.Note*20)% Complete</span>
+                        <span class="sr-only">@(item.Note * 20)% Complete</span>
                     </div>
                 </div>
             </td>
             <td>
                 @item.LastAccess.ToString()
+            </td>
+            <td>
+                @item.ReactionTime ms
             </td>
             <td>
                 @Html.ActionLink("Edit", "EditWord", new { wordhash = item.WordHash, cathash = item.Category }) |

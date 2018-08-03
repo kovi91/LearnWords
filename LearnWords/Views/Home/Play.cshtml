@@ -5,10 +5,36 @@
 }
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
+    $begintime = 0;
+    $endtime = 0;
+    $difference = 0;
     $(document).ready(function () {
         $("#btn_reveal").click(function () {
             $("#foreign").show();
+            var dd = new Date();
+            $endtime = dd.getTime();
+            $difference = $endtime - $begintime;
+            $("#stopwatch").text($difference);
+            var text = document.getElementById('badbuttons').innerHTML;
+            text = text.replace("555", $difference);
+            text = text.replace("555", $difference);
+            text = text.replace("555", $difference);
+            text = text.replace("555", $difference);
+            text = text.replace("555", $difference);
+            document.getElementById('badbuttons').innerHTML = "";
+            document.getElementById('badbuttons').innerHTML = text;
+
+            var text = document.getElementById('goodbuttons').innerHTML;
+            text = text.replace("555", $difference);
+            text = text.replace("555", $difference);
+            text = text.replace("555", $difference);
+            text = text.replace("555", $difference);
+            text = text.replace("555", $difference);
+            document.getElementById('goodbuttons').innerHTML = "";
+            document.getElementById('goodbuttons').innerHTML = text;
         });
+        var d = new Date();
+        $begintime = d.getTime();
     });
 </script>
 
@@ -41,19 +67,22 @@
                                 </td>
                             </tr>
                         </table>
-                        <div class="btn-group" role="group" aria-label="...">
-                            @Html.ActionLink("5", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 0, note = 5 }, htmlAttributes: new { @class = "btn btn-danger" })
-                            @Html.ActionLink("4", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 0, note = 4 }, htmlAttributes: new { @class = "btn btn-danger" })
-                            @Html.ActionLink("3", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 0, note = 3 }, htmlAttributes: new { @class = "btn btn-danger" })
-                            @Html.ActionLink("2", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 0, note = 2 }, htmlAttributes: new { @class = "btn btn-danger" })
-                            @Html.ActionLink("1", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 0, note = 1 }, htmlAttributes: new { @class = "btn btn-danger" })
+                        <div id="stopwatch">
+                            
                         </div>
-                        <div class="btn-group" role="group" aria-label="...">
-                            @Html.ActionLink("1", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 1, note = 1 }, htmlAttributes: new { @class = "btn btn-success" })
-                            @Html.ActionLink("2", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 1, note = 2 }, htmlAttributes: new { @class = "btn btn-success" })
-                            @Html.ActionLink("3", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 1, note = 3 }, htmlAttributes: new { @class = "btn btn-success" })
-                            @Html.ActionLink("4", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 1, note = 4 }, htmlAttributes: new { @class = "btn btn-success" })
-                            @Html.ActionLink("5", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 1, note = 5 }, htmlAttributes: new { @class = "btn btn-success" })
+                        <div id="badbuttons" class="btn-group" role="group" aria-label="...">
+                            @Html.ActionLink("5", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 0, note = 5, time = 555 }, htmlAttributes: new { @class = "btn btn-danger" })
+                            @Html.ActionLink("4", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 0, note = 4, time = 555 }, htmlAttributes: new { @class = "btn btn-danger" })
+                            @Html.ActionLink("3", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 0, note = 3, time = 555 }, htmlAttributes: new { @class = "btn btn-danger" })
+                            @Html.ActionLink("2", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 0, note = 2, time = 555 }, htmlAttributes: new { @class = "btn btn-danger" })
+                            @Html.ActionLink("1", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 0, note = 1, time = 555 }, htmlAttributes: new { @class = "btn btn-danger" })
+                        </div>
+                        <div id="goodbuttons" class="btn-group" role="group" aria-label="...">
+                            @Html.ActionLink("1", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 1, note = 1, time = 555 }, htmlAttributes: new { @class = "btn btn-success" })
+                            @Html.ActionLink("2", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 1, note = 2, time = 555 }, htmlAttributes: new { @class = "btn btn-success" })
+                            @Html.ActionLink("3", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 1, note = 3, time = 555 }, htmlAttributes: new { @class = "btn btn-success" })
+                            @Html.ActionLink("4", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 1, note = 4, time = 555 }, htmlAttributes: new { @class = "btn btn-success" })
+                            @Html.ActionLink("5", "PlayNext", new { wordhash = Model.WordHash, categoryhash = Model.Category, result = 1, note = 5, time = 555 }, htmlAttributes: new { @class = "btn btn-success" })
                         </div>
 
                     </div>

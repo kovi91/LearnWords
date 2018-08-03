@@ -32,6 +32,29 @@ namespace LearnWords.Data
             _categories = _db.GetCollection<CategoryModel>("categories");
         }
 
+        public IEnumerable<WordModel> GetWeakCollection(string categoryhash)
+        {
+            var coll = from x in _collection.Linq()
+                       where x.Category == categoryhash
+                       select x;
+
+            double numbers = 0;
+            int count = 0;
+            foreach (var item in coll)
+            {
+                numbers += item.ReactionTime;
+                count++;
+            }
+
+            double avgtime = numbers / (double)count;
+
+            var coll2 = from x in _collection.Linq()
+                        where x.Category == categoryhash && (x.Bads > 0  || x.ReactionTime > (avgtime + avgtime*0.5))
+                        select x;
+
+            return coll2;
+        }
+
         public IEnumerable<CategoryModel> GetCategories()
         {
             var q = from x in _categories.Linq()

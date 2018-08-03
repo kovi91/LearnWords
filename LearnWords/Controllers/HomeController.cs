@@ -108,9 +108,17 @@ namespace LearnWords.Controllers
 
         [Authorize]
         [HttpGet]
-        public IActionResult PlayNext(string wordhash, string categoryhash, int result, int note)
+        public IActionResult PlaySimpleWeak(string categoryhash)
         {
-            _gl.AddResult(wordhash, result, note);
+            _gl.Init(categoryhash, _repo, true);
+            return View("Play", _gl.GetNextWord());
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult PlayNext(string wordhash, string categoryhash, int result, int note, int time)
+        {
+            _gl.AddResult(wordhash, result, note, time);
             WordModel next = _gl.GetNextWord();
             if (next == null)
             {
@@ -132,7 +140,7 @@ namespace LearnWords.Controllers
         public IActionResult DeleteWords(string categoryhash)
         {
             _repo.DeleteAll(categoryhash);
-            return RedirectToAction("Explore", categoryhash);
+            return RedirectToAction("Explore", "Home", categoryhash);
         }
 
         [Authorize]

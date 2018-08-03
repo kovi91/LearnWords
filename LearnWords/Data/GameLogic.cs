@@ -26,7 +26,20 @@ namespace LearnWords.Data
             
         }
 
-       
+        public void Init(string categoryhash, MongoRepository repo, bool weak, int count = 0)
+        {
+            r = new Random();
+            _repo = repo;
+            gamewords = new List<WordModel>();
+            var coll = repo.GetWeakCollection(categoryhash);
+
+            WordModel[] tmparray = coll.ToArray();
+
+            MixandPrepare(tmparray, gamewords, count);
+
+        }
+
+
 
         public void Init(List<string> categoryhashes, MongoRepository repo, int count = 0)
         {
@@ -70,7 +83,7 @@ namespace LearnWords.Data
         {
             int a = 0;
             int b = 0;
-            for (int i = 0; i < 10000; i++)
+            for (int i = 0; i < 100000; i++)
             {
                 a = r.Next(0, arraytomix.Length);
                 b = r.Next(0, arraytomix.Length);
@@ -94,10 +107,19 @@ namespace LearnWords.Data
             }
         }
 
-        public void AddResult(string wordhash, int result, int note)
+        public void AddResult(string wordhash, int result, int note, int time)
         {
             WordModel actual = _repo.GetWord(wordhash);
             actual.LastAccess = DateTime.Now;
+            if (actual.ReactionTime > 0)
+            {
+                actual.ReactionTime = (actual.ReactionTime + time) / 2;
+            }
+            else
+            {
+                actual.ReactionTime = time;
+            }
+            
             if (result == 1)
             {
                 actual.Goods++;
