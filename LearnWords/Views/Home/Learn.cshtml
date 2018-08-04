@@ -6,6 +6,7 @@
 
 <h2>Learn</h2>
 
+<script src='https://code.responsivevoice.org/responsivevoice.js'></script>
 
 <p>
     @Html.ActionLink("Back to categories", "Browse", null, htmlAttributes: new { @class = "btn btn-success" })
@@ -13,12 +14,16 @@
 
 @foreach (var item in @Model)
 {
+     
+    string szo = item.ForeLang.Replace(" ", "_") + "_m";
     <div style="display: block">
         <div class="col-xs-6 col-md-3">
             <div class="thumbnail">
                 <img src="~/images/wordpictures/@item.ImageUrl" alt="picture" height="171">
                 <div class="caption">
-                    <h3>@item.ForeLang</h3>
+                    <h3>
+                        <input onclick='responsiveVoice.speak("@item.ForeLang");' type='button' class="btn btn-primary" value='@item.ForeLang' />
+                    </h3>
                     <p>@item.HomeLang</p>
                 </div>
             </div>
